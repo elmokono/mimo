@@ -31,7 +31,9 @@ namespace mimo.Controller
                     plugins.Add(x);
                 }
             }
-            
+
+            if (!plugins.Any()) { throw new DllNotFoundException("No Plugins Configured :("); }
+
             currentPlugin = plugins.First();
             inPluginMenu = true;
 
