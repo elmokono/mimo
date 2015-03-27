@@ -96,10 +96,9 @@ namespace mimo.UI.Engine
                         dispose();
                         state = ProgramState.LookingUpArduino;
                     }
-                    //running
                 }
 
-                Thread.Sleep(5000);
+                //running!
             }
             
         }
@@ -136,9 +135,9 @@ namespace mimo.UI.Engine
                 SerialPort sp = (SerialPort)sender;
                 var s = sp.ReadLine();
 
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(s);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Cyan;
+                //Console.WriteLine(s);
+                //Console.ForegroundColor = ConsoleColor.Gray;
 
                 processResponse(s);
             }
@@ -173,7 +172,7 @@ namespace mimo.UI.Engine
                 { 
                     if (response.val.Equals("ok") && ActionClick != null) { ActionClick(); }
                     if (response.val.Equals("back") && BackClick != null) { BackClick(); }
-                    if (response.val.Equals("next") && NextClick != null) { NextClick(); }
+                    if (response.val.Equals("menu") && NextClick != null) { NextClick(); }
                 }
             }
             else
@@ -311,34 +310,32 @@ namespace mimo.UI.Engine
             }
         }
 
-        public void Led(float percentage)
+        public void Led(int idx, bool state)
         {
-            var perc = "";
-
-            if (percentage < 25) { perc = "0"; }
-
-            if (percentage >= 25) { perc = "1"; }
-            if (percentage >= 50) { perc = "2"; }
-            if (percentage >= 75) { perc = "3"; }
-
-            if (percentage >= 100) { perc = "A"; }
-
-            write("L_" + perc);
+            sendCommand(new LedCommand(idx, state));
         }
 
         /// <summary>
         /// display text in "n" rows
         /// </summary>
         /// <param name="text">Split lines with \n</param>
-        public void Display(string[] texts)
+        public void Display(string text)
         {
-            var rows = texts
-                .Take(_lcdRows)
-                .Select(x => x.Substring(0, (x.Length > _lcdCols ? _lcdCols : x.Length)))
-                .Select(x => x.PadRight(_lcdCols, ' '))
-                .ToList();
-
-            write("D_" + String.Join("", rows));
+            var rows = text.Split("\r\n".ToCharArray()).Where(x => x.Length > 0);
+            var sb = new StringBuilder();
+            foreach (var row in rows)
+            {
+                if (row.Length > _lcdCols)
+                {
+                    sb.Append(row.Substring(0, _lcdCols));
+                }
+                else
+                {
+                    sb.Append(row + new String(' ', _lcdCols - row.Length));
+                }
+            }
+            
+            sendCommand(new DisplayCommand(sb.ToString()));            
         }
     }
 }

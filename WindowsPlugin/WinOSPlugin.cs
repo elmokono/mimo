@@ -14,7 +14,7 @@ namespace mimo
         private PerformanceCounter ramCounter;
 
         public WinOSPlugin()
-            : base("WinOS")
+            : base("Windows Counters")
         {
             var root = new XElement("root",new XAttribute("ID", "CPUM"), 
                 new XElement("item", new XAttribute("ID", "TEMP"), new XAttribute("Text", "Temperature")),

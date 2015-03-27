@@ -10,7 +10,7 @@ namespace mimo
     public class uTPlugin : Plugin
     {
         public uTPlugin()
-            : base("uT")
+            : base("uTorrent")
         {
             var root = new XElement("root",
                 new XElement("item", new XAttribute("Text", "Active")),

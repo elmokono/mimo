@@ -12,23 +12,7 @@ namespace mimo
         static void Main(string[] args)
         {
             var controller = new Controller.Core();
-            while (true)
-            {
-                var key = Console.ReadKey().Key;
-                if (key == ConsoleKey.RightArrow)
-                {
-                    controller.Action(UserActions.Next);
-                }
-                if (key == ConsoleKey.Backspace)
-                {
-                    controller.Action(UserActions.Back);
-                }
-                if (key == ConsoleKey.Enter)
-                {
-                    controller.Action(UserActions.Open);
-                }
-            }
-            
+            Thread.Sleep(int.MaxValue);                        
         }
     }
 }

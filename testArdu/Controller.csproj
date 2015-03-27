@@ -52,6 +52,10 @@
       <Project>{caad722a-b7b5-4373-807a-bd33451092ee}</Project>
       <Name>Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UI-Arduino\UI-Arduino.csproj">
+      <Project>{fca5ba41-1e99-4825-b5ea-ec0d6ea14a44}</Project>
+      <Name>UI-Arduino</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

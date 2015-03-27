@@ -17,11 +17,13 @@ namespace mimo.Controller
         protected Plugin currentPlugin;
         protected Boolean inPluginMenu;
         protected System.Timers.Timer poller;
+        protected mimo.UI.Engine.ArduinoInterface ui;
 
         public Core()
         {
             //load plugins
             plugins = new List<Plugin>();
+
             foreach (var file in Directory.GetFiles(@".\"))
             {
                 if (file.EndsWith("Plugin.dll", StringComparison.OrdinalIgnoreCase))
@@ -39,8 +41,45 @@ namespace mimo.Controller
 
             //poll plugins
             poller = new System.Timers.Timer();
-            poller.Interval = 100;
+            poller.Interval = 1000;
             poller.Elapsed += poller_Elapsed;
+            //poller.Start(); <-- moved to onConnect
+            
+            //ui
+            ui = new UI.Engine.ArduinoInterface();
+            ui.OnConnect += ui_OnConnect;
+            ui.OnDisconnect += ui_OnDisconnect;
+            ui.ActionClick += ui_ActionClick;
+            ui.BackClick += ui_BackClick;
+            ui.NextClick += ui_NextClick;
+            ui.Start();
+        }
+
+        void ui_NextClick()
+        {
+            Action(UserActions.Next);
+            poller_Elapsed(poller, null);
+        }
+
+        void ui_BackClick()
+        {
+            Action(UserActions.Back);
+            poller_Elapsed(poller, null);
+        }
+
+        void ui_ActionClick()
+        {
+            Action(UserActions.Open);
+            poller_Elapsed(poller, null);
+        }
+
+        void ui_OnDisconnect()
+        {
+            //
+        }
+
+        void ui_OnConnect()
+        {
             poller.Start();
         }
 
@@ -96,8 +135,9 @@ namespace mimo.Controller
             }
             
             //TODO: show in monitor
-            Console.Clear();
-            Console.WriteLine(displayText);
+            ui.Display(displayText);
+            //Console.Clear();
+            //Console.WriteLine(displayText);
         }
 
         #region reflection

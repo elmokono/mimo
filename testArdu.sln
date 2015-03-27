@@ -13,6 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTPlugin", "uTPlugin\uTPlug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-Arduino", "UI-Arduino\UI-Arduino.csproj", "{FCA5BA41-1E99-4825-B5EA-EC0D6EA14A44}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arduino", "Arduino", "{B8553F19-D45D-45E4-955A-6986C2391A64}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz
+		..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png
+		..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png
+		..\..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino = ..\..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
