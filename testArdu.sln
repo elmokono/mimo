@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "testArdu\Controller.csproj", "{89C07736-6635-42AF-BCE1-F29C0A6513E3}"
 EndProject
@@ -15,13 +15,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-Arduino", "UI-Arduino\UI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arduino", "Arduino", "{B8553F19-D45D-45E4-955A-6986C2391A64}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz
-		..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png
-		..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png = ..\..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png
-		..\..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino = ..\..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino
+		..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz = ..\..\Desktop\uTorrent\EsquemaNANOFisico.fzz
+		..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png = ..\..\Desktop\uTorrent\EsquemaNANOFisico_bb.png
+		..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png = ..\..\Desktop\uTorrent\EsquemaNANOFisico_bb2.png
+		..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino = ..\..\Desktop\uTorrent\Arduino\NANO-WorkingJSON\NANO-WorkingJSON.ino
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9BB83E83-63F8-4AFD-B652-AAACC167909C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "networkPlugin", "networkPlugin\networkPlugin.csproj", "{71BB72F9-A3A9-4175-ACA3-E49A989197B4}"
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -47,8 +55,17 @@ Global
 		{FCA5BA41-1E99-4825-B5EA-EC0D6EA14A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCA5BA41-1E99-4825-B5EA-EC0D6EA14A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCA5BA41-1E99-4825-B5EA-EC0D6EA14A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71BB72F9-A3A9-4175-ACA3-E49A989197B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71BB72F9-A3A9-4175-ACA3-E49A989197B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71BB72F9-A3A9-4175-ACA3-E49A989197B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71BB72F9-A3A9-4175-ACA3-E49A989197B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C3F9046-DC2A-4CD1-9EE5-2BA317164346} = {9BB83E83-63F8-4AFD-B652-AAACC167909C}
+		{33D0FCCB-87D3-46C5-B93E-DD4A0DFF95CF} = {9BB83E83-63F8-4AFD-B652-AAACC167909C}
+		{71BB72F9-A3A9-4175-ACA3-E49A989197B4} = {9BB83E83-63F8-4AFD-B652-AAACC167909C}
 	EndGlobalSection
 EndGlobal

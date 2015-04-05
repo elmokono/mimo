@@ -16,9 +16,9 @@ namespace mimo
         public WinOSPlugin()
             : base("Windows Counters")
         {
-            var root = new XElement("root",new XAttribute("ID", "CPUM"), 
-                new XElement("item", new XAttribute("ID", "TEMP"), new XAttribute("Text", "Temperature")),
-                new XElement("item", new XAttribute("ID", "COOL"), new XAttribute("Text", "Coolers")),
+            var root = new XElement("root"/*, new XAttribute("ID", "CPUM")*/,
+                new XElement("item", new XAttribute("Text", "Temperature"), new XAttribute("ID", "TEMP")),
+                new XElement("item", new XAttribute("Text", "Coolers"), new XAttribute("ID", "COOL")),
                 new XElement("item", new XAttribute("Text", "CPU and Memo"), new XElement("CPUM"))
             );
 
@@ -32,7 +32,7 @@ namespace mimo
                 CounterName = "% Processor Time",
                 InstanceName = "_Total",
             };
-            ramCounter = new PerformanceCounter("Memory", "Available MBytes"); 
+            ramCounter = new PerformanceCounter("Memory", "Available MBytes");
         }
 
         public override void Start()
@@ -44,7 +44,7 @@ namespace mimo
         {
             //fill windows info based on current item
             if (currentItem.Name.LocalName.Equals("CPUM"))
-            {                
+            {
                 return String.Format("CPU {0:#0.00}%\r\nRAM {1} MB", cpuCounter.NextValue(), ramCounter.NextValue());
             }
 
