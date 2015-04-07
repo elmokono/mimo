@@ -25,9 +25,11 @@ namespace mimo.UI.Engine
         private ProgramState state;
         private System.Timers.Timer timerSync;
         private bool inSync;
+        private DateTime lastSync;
         private bool hasCapabilities;
 
-        private const int BAUDRATE = 9600;
+        private const int SYNCTIMEOUT = 3000;
+        private const int BAUDRATE = 19200;
 
         public event Click BackClick;
         public event Click NextClick;
@@ -86,6 +88,7 @@ namespace mimo.UI.Engine
 
                     if (OnConnect != null) { OnConnect(); }
                     state = ProgramState.InSync;
+                    //lastSync = DateTime.Now;
                 }
                 
                 
@@ -98,6 +101,7 @@ namespace mimo.UI.Engine
                     }
                 }
 
+                Thread.Sleep(250);
                 //running!
             }
             
@@ -107,7 +111,10 @@ namespace mimo.UI.Engine
 
         void timerSync_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            sendCommand(new SyncCommand());
+            if (DateTime.Now.Subtract(lastSync).TotalMilliseconds > SYNCTIMEOUT)
+            {
+                sendCommand(new SyncCommand());
+            }
         }
 
         void serial_PinChanged(object sender, SerialPinChangedEventArgs e)
@@ -160,11 +167,17 @@ namespace mimo.UI.Engine
         {
             var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ArduinoResponse>(s);
 
+            //all kind of responses are considered sync signals
+            lastSync = DateTime.Now;
+            inSync = true;
+
             if (response.cmd != null && response.succeeded)
             {
                 if (response.cmd.Equals("Sync"))
                 {
-                    inSync = true;                    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Arduino Sync Response!");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     return;
                 }
 
@@ -307,6 +320,7 @@ namespace mimo.UI.Engine
             catch (Exception ex)
             {
                 Console.WriteLine("!: {0}", ex.Message);
+                dispose();
             }
         }
 
@@ -336,6 +350,11 @@ namespace mimo.UI.Engine
             }
             
             sendCommand(new DisplayCommand(sb.ToString()));            
+        }
+
+        public String GetCurrentStatus()
+        {
+            return state.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -13,7 +14,8 @@ namespace mimo
     {
         private WebClient _wc;
         private long _downloadKbps;
-        
+        BackgroundWorker bw = new BackgroundWorker();
+
         public networkPlugin()
             : base("Network")
         {
@@ -28,9 +30,19 @@ namespace mimo
             _wc = new WebClient();
             _wc.Credentials = new NetworkCredential("admin", "yayayaya");
             _downloadKbps = 0;
-            long lastValue = 0;
+            
+            bw.WorkerSupportsCancellation = true;
+            bw.WorkerReportsProgress = false;
+            bw.DoWork += bw_DoWork;
+            bw.RunWorkerAsync();
+        }
 
-            while (true)
+        void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            long lastValue = 0;
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            while (!worker.CancellationPending)
             {
                 var sz = _wc.DownloadString("http://192.168.1.1/fetchif.cgi?vlan2");
                 var values = sz.Split(' ');
@@ -39,7 +51,7 @@ namespace mimo
                 lastValue = v;
                 Thread.Sleep(1000);
             }
-
+            e.Cancel = true;
         }
 
         public override void Start()

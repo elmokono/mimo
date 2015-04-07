@@ -91,6 +91,8 @@ namespace mimo.Controller
 
         public void Action(UserActions action)
         {
+            Console.WriteLine("Action: {0}", action.ToString());
+
             //menu of plugins
             if (inPluginMenu)
             {
@@ -134,10 +136,21 @@ namespace mimo.Controller
                 displayText = currentPlugin.Poll();
             }
             
-            //TODO: show in monitor
-            ui.Display(displayText);
+            //CONSOLE
             //Console.Clear();
-            //Console.WriteLine(displayText);
+            //Console.WriteLine("MIMO");
+            //Console.WriteLine("----------------------------------------------");
+            //Console.WriteLine("Current Plugin: {0}", currentPlugin.Name);
+           // Console.WriteLine("UI State: {0}", ui.GetCurrentStatus());
+            //Console.WriteLine("Now Displaying: {0}", displayText);
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("{0}: {1}", DateTime.Now, displayText);
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+
+
+            //GUI
+            ui.Display(displayText);
         }
 
         #region reflection
